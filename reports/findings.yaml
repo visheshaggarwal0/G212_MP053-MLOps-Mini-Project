@@ -36,11 +36,11 @@ tracking:
   champion_version: 2
 monitoring:
   psi:
-    students_registered: 3.3498
+    students_registered: 4.5300
     attendance_pct: 0.2241
     menu_rating: 0.0186
     temp_c: 0.0446
-    cooked_kg: 0.0969
+    cooked_kg: 0.0999
     plate_size_cm: 0.0411
   most_drifted_feature: students_registered
   mae_by_group:
