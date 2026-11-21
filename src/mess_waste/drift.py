@@ -24,6 +24,8 @@ def calculate_psi(ref: pd.Series | np.ndarray, comp: pd.Series | np.ndarray, bin
         max_val = max(ref_arr.max(), comp_arr.max())
         bin_edges = np.linspace(min_val - 1e-5, max_val + 1e-5, bins + 1)
 
+    bin_edges[0] = -np.inf
+    bin_edges[-1] = np.inf
     ref_counts, _ = np.histogram(ref_arr, bins=bin_edges)
     comp_counts, _ = np.histogram(comp_arr, bins=bin_edges)
 
