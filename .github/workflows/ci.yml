@@ -1,0 +1,39 @@
+# ── CI for G212 / MP053 ─────────────────────────────────────────────────────
+# Runs the full pytest suite on every push and every pull request.
+# The marking tool checks that this key is `on:` (not `true:`).
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Run pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Python 3.12 (matches the Dockerfile base image)
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 3. Cache pip packages so repeated runs are faster
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # 4. Install all pinned dependencies from requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 5. Run the test suite — tests build their own data, no CSV files needed
+      - name: Run pytest
+        run: python -m pytest -v
