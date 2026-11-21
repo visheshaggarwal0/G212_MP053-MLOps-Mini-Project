@@ -36,4 +36,4 @@ jobs:
 
       # 5. Run the test suite — tests build their own data, no CSV files needed
       - name: Run pytest
-        run: pytest -v
+        run: python -m pytest -v
