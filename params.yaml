@@ -1,0 +1,31 @@
+data:
+  raw_train_path: "data/raw/train.csv"
+  raw_later_path: "data/raw/later.csv"
+  holdout_path: "data/raw/holdout_features.csv"
+  numeric_features:
+    - students_registered
+    - attendance_pct
+    - menu_rating
+    - temp_c
+    - cooked_kg
+    - plate_size_cm
+  categorical_features:
+    - meal
+    - hostel
+  target: "waste_kg"
+
+split:
+  test_size: 0.2
+  seed: 42
+
+training:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "mess-waste"
+  registered_model_name: "mess-waste-model"
+  model_path: "models/model.joblib"
+
+monitoring:
+  psi_bins: 10
+  retrain_split: 0.70
+  promotion_threshold: 0.08
+  predictions_path: "predictions/holdout_predictions.csv"
