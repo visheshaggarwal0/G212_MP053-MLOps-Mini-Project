@@ -1,0 +1,14 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mp053-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: mp053-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  
